@@ -1,0 +1,59 @@
+---
+title: "tproj"
+output: html_document
+---
+Facebook
+```{r}
+library(httpuv)
+library(httr)
+library(rtweet)
+library(tidytext)
+twitter_token = readRDS(file="/Users/joshuagrajales/Desktop/tw_token.RData")
+
+```
+
+
+```{r}
+query = readline(prompt="Enter the query (company name): ")
+stdate = readline(prompt = "Enter the start query date (YYYYMMDD0000) : ")
+endate = readline(prompt = "Enter the start query date (YYYYMMDD0000) : ")
+saveas = readline(prompt = "Enter the name of you'd like to save file as (must terminate in '.csv': ")
+path = "/Users/joshuagrajales/Desktop/qac211/project/SM_comm/facebook/"
+
+d = search_fullarchive(q = query, n=100, fromDate = stdate, toDate = endate, token = twitter_token, parse = TRUE, env_name = "qac211proj")
+
+text_data = as.data.frame(d$text)
+
+abs_path = paste(path,saveas, sep='')
+
+write.csv(text_data, abs_path, row.names = FALSE)
+
+```
+
+## 2019
+
+```{r}
+query = "(Facebook OR Meta) lang:en"
+stdate = "201909010000"
+endate = "201909280000"
+saveas = "facebook1.csv"
+
+```
+## 2020
+
+```{r}
+query = "(Facebook OR Meta) lang:en"
+stdate = "202009010000"
+endate = "202009280000"
+saveas = "facebook2.csv"
+
+```
+## 2021
+
+```{r}
+query = "(Facebook OR Meta) lang:en"
+stdate = "202112010000"
+endate = "202112310000"
+saveas = "facebook3.csv"
+
+```
